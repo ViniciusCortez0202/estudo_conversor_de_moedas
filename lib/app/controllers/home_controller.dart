@@ -9,10 +9,13 @@ class HomeController{
   final TextEditingController fromText;
 
   //late List<CurrencyModel> currencies;
+  late List<CurrencyModel> currencies;
   late CurrencyModel currency;
   late CurrencyRepository repository;
 
   HomeController({required this.toText, required this.fromText, required this.repository}){
+    this.currencies = CurrencyModel.getCurrencies();
+    currency = CurrencyModel("BRL", "USD");
     // currencies = CurrencyModel.getCurrencies();
     // fromCurrency = currencies[0];
     // toCurrency = currencies[1];
