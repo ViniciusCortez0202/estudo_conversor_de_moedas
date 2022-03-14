@@ -1,5 +1,7 @@
 import 'package:conversor_de_moedas/app/components/convert_box.dart';
 import 'package:conversor_de_moedas/app/controllers/home_controller.dart';
+import 'package:conversor_de_moedas/app/repositries/currency_repository.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +21,7 @@ class _HomeViewState extends State<HomeView> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    homeController = HomeController(toText: toText, fromText: fromText);
+    homeController = HomeController(toText: toText, fromText: fromText, repository: CurrencyRepository(Dio()));
   }
 
   @override
@@ -47,10 +49,10 @@ class _HomeViewState extends State<HomeView> {
                   items: homeController.currencies,
                   onChanged: (model) {
                     setState(() {
-                      homeController.fromCurrency = model!;
+                      homeController.currency.currencyFrom = model!.currencyFrom;
                     });
                   },
-                  dropValue: homeController.fromCurrency,
+                  dropValue: homeController.currencies[0],
                 ),
                 SizedBox(
                   height: 20,
@@ -59,11 +61,11 @@ class _HomeViewState extends State<HomeView> {
                   controller: toText,
                   items: homeController.currencies,
                   onChanged: (model) {
-                    setState(() {
-                      homeController.toCurrency = model!;
+                    setState(() {                      
+                      homeController.currency.currencyTo = model!.currencyTo;
                     });
                   },
-                  dropValue: homeController.toCurrency,
+                  dropValue: homeController.currencies[1],
                 ),
                 Container(
                   height: 40,

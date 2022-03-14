@@ -1,4 +1,3 @@
-import 'package:conversor_de_moedas/app/controllers/home_controller.dart';
 import 'package:conversor_de_moedas/app/models/currency_model.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +31,7 @@ class ConvertBox extends StatelessWidget {
               ),
               items: items
                   .map<DropdownMenuItem<CurrencyModel>>(
-                      (e) => DropdownMenuItem(value: e, child: Text(e.name)))
+                      (e) => DropdownMenuItem(value: e, child: Text(e.currencyFrom)))
                   .toList(),
               onChanged: onChanged,
             ),
